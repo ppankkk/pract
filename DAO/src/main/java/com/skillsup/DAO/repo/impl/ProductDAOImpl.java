@@ -1,30 +1,48 @@
 package com.skillsup.DAO.repo.impl;
 
 import com.skillsup.DAO.model.Product;
-import com.skillsup.DAO.model.User;
 import com.skillsup.DAO.repo.ProductDAO;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO{
-    private final Map<Long,Product> productMap = new HashMap<>();
-    private static volatile long idGenerator =1L;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
     public void create(Product product) {
-        product.setId(idGenerator++);
-        productMap.put(product.getId(),product);
+        entityManager.persist(product);
     }
 
     @Override
-    public List<Product> getAll() {
-        return new ArrayList<>(productMap.values());
+    public List<Product> findAll() {
+        TypedQuery<Product> findAllProducts =
+                entityManager.createQuery("SELECT p FROM Product p", Product.class);
+
+        return findAllProducts.getResultList();
     }
-    public Map<Long, Product> getProductMap() {
-        return productMap;
+
+    @Override
+    public void delete(Long id) {
+        Query query = entityManager.createQuery("DELETE FROM Product p WHERE p.id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
+
+    @Override
+    public void update(Long id, Product product) {
+        product.setId(id);
+        entityManager.merge(product);
+    }
+
+    @Override
+    public Product get(Long id) {
+        return entityManager.find(Product.class, id);
     }
 }

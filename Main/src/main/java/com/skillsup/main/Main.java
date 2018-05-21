@@ -1,7 +1,5 @@
 package com.skillsup.main;
 
-
-
 import com.skillsup.DAO.repo.impl.ProductDAOImpl;
 import com.skillsup.DAO.repo.impl.UserDAOImpl;
 import com.skillsup.services.DTO.ProductDTO;
@@ -18,9 +16,12 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
         ApplicationContext applicationContext = new GenericXmlApplicationContext("context-main.xml");
+
         UserServices userServices = applicationContext.getBean(UserServices.class);
         ProductService productServices = applicationContext.getBean(ProductService.class);
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         boolean result = true;
@@ -37,12 +38,12 @@ public class Main {
                     System.out.println(userDAO.findAll());
                     break;
                 case "PC":
-                    ProductDTO productDTO = new ProductDTO(args[1],args[2],args[3],args[4],Integer.parseInt(args[5]),Integer.parseInt(args[6]));
+                    ProductDTO productDTO = new ProductDTO(args[1],args[2],args[3],args[4],Integer.parseInt(args[5]),Integer.parseInt(args[6]), args[7]);
                     productServices.create(productDTO);
                     break;
                 case "PL":
                     ProductDAOImpl productDAO = applicationContext.getBean(ProductDAOImpl.class);
-                    System.out.println(productDAO.getAll());
+                    System.out.println(productDAO.findAll());
                     break;
                 default:
                     if(line.equals("exit")){

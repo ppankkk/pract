@@ -1,15 +1,37 @@
 package com.skillsup.DAO.model;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "PRODUCTS")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false)
     private Long id;
+
+    @Column(name = "NAME", nullable = false)
     private String name;
-    private int price;
+
+    @Column(name = "PRICE", nullable = false)
+    private Integer price;
+
+    @Column(name = "CATEGORY", nullable = false)
     private String category;
+
+    @Column(name = "GENDER", nullable = false)
     private String gender;
+
+    @Column(name = "COLOR", nullable = false)
     private String color;
+
+    @Column(name = "PROD_SIZE", nullable = false)
     private String size;
-    private int count;
+
+    @Column(name = "COUNT_IN_WAREHOUSE")
+    private Integer count;
 
     public Product() {
     }
@@ -18,8 +40,8 @@ public class Product {
                    String category,
                    String color,
                    String gender,
-                   int count,
-                   int price,
+                   Integer count,
+                   Integer price,
                    String size,
                    Long id) {
         this.name = name;
@@ -46,12 +68,47 @@ public class Product {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(name, product.name) &&
+                Objects.equals(price, product.price) &&
+                Objects.equals(category, product.category) &&
+                Objects.equals(gender, product.gender) &&
+                Objects.equals(color, product.color) &&
+                Objects.equals(size, product.size);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, price, category, gender, color, size);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public String getCategory() {
@@ -62,14 +119,6 @@ public class Product {
         this.category = category;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -78,12 +127,12 @@ public class Product {
         this.gender = gender;
     }
 
-    public int getCount() {
-        return count;
+    public String getColor() {
+        return color;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public String getSize() {
@@ -94,19 +143,11 @@ public class Product {
         this.size = size;
     }
 
-    public int getPrice() {
-        return price;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

@@ -7,6 +7,7 @@ import com.skillsup.services.UserServices;
 import com.skillsup.services.convert.UserConvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +24,14 @@ public class UserServiceImpl implements UserServices{
     }
 
     @Override
+    @Transactional
     public void create(UserDTO user) {
 
         userDao.create(userConvert.toEntity(user));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<UserDTO> findAll() {
         List<User> users = userDao.findAll();
         List<UserDTO> userDTOS = new ArrayList<>();
@@ -36,5 +39,25 @@ public class UserServiceImpl implements UserServices{
             userDTOS.add(userConvert.toDto(user));
         }
         return userDTOS;
+    }
+
+// 21-05-2018 homework
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        userDao.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public void update(Long id, User user) {
+        userDao.update(id, user);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public User get(Long id) {
+        userDao.get(id);
+        return null;
     }
 }

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ProductService {
     void create(ProductDTO product);
-    List<ProductDTO> getAll();
+    List<ProductDTO> findAll();
 }

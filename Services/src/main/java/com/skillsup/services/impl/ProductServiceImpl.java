@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<ProductDTO> getAll() {
-        List<Product> products = productDAO.getAll();
+    public List<ProductDTO> findAll() {
+        List<Product> products = productDAO.findAll();
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(Product product: products){
             productDTOS.add(productConvert.toDto(product));
