@@ -83,4 +83,17 @@ public class ProductDTO {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", color='" + color + '\'' +
+                ", count=" + count +
+                ", price=" + price +
+                ", gender='" + gender + '\'' +
+                ", size='" + size + '\'' +
+                '}';
+    }
 }

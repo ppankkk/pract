@@ -50,13 +50,13 @@ public class UserServiceImpl implements UserServices{
 
     @Override
     @Transactional
-    public void update(Long id, User user) {
-        userDao.update(id, user);
+    public void update(Long id, UserDTO user) {
+        userDao.update(id, userConvert.toEntity(user));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User get(Long id) {
+    public UserDTO get(Long id) {
         userDao.get(id);
         return null;
     }
