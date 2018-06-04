@@ -7,6 +7,7 @@ import com.skillsup.services.ProductService;
 import com.skillsup.services.convert.ProductConvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,13 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    @Transactional
     public void create(ProductDTO product) {
         productDAO.create(productConvert.toEntity(product));
     }
 
     @Override
+    @Transactional
     public List<ProductDTO> findAll() {
         List<Product> products = productDAO.findAll();
         List<ProductDTO> productDTOS = new ArrayList<>();
@@ -35,5 +38,23 @@ public class ProductServiceImpl implements ProductService{
             productDTOS.add(productConvert.toDto(product));
         }
         return productDTOS;
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        productDAO.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public void update(Long id, ProductDTO product) {
+        productDAO.update(id, productConvert.toEntity(product));
+    }
+
+    @Override
+    @Transactional
+    public ProductDTO get(Long id) {
+        return productConvert.toDto(productDAO.get(id));
     }
 }
