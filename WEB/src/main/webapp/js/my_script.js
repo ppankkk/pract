@@ -16,7 +16,7 @@ $(document).ready(function () {
     });
 
     $(".show_products").click(function () {
-        $.getJSON("http://localhost:8080/products",function(response){
+        $.getJSON("/products",function(response){
             var tblHTML ='<tr><th>Product</th><th>Category</th><th>Color</th><th>Cout in warehouse</th>'
                            + '<th>Price</th><th>Gender</th><th>Size</th></tr>';
             $.each(response, function(i, item){
@@ -34,7 +34,7 @@ $(document).ready(function () {
     });
 
     $(".show_orders").click(function () {
-        // $.getJSON("http://localhost:8080/orders",function(response){
+        // $.getJSON("/orders",function(response){
             var tblHTML ='<tr><th>Здесь будет отображение заказаов :)</th></tr>'/*'<tr><th>Product</th><th>Category</th><th>Color</th><th>Cout in warehouse</th>'
                 + '<th>Price</th><th>Gender</th><th>Size</th></tr>';*/
             // $.each(response, function(i, item){
