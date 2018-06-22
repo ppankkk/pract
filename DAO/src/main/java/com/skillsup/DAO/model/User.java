@@ -1,7 +1,9 @@
 package com.skillsup.DAO.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
@@ -21,6 +23,8 @@ public class User {
     @Column(name = "ID", nullable = false)
     private Long id;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders = new HashSet<>();
 
     public User() {
     }

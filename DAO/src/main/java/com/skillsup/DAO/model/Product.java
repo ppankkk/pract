@@ -1,6 +1,7 @@
 package com.skillsup.DAO.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,6 +33,9 @@ public class Product {
 
     @Column(name = "COUNT_IN_WAREHOUSE")
     private Integer count;
+
+    @ManyToMany(mappedBy="products")
+    private List<Order> orders;
 
     public Product() {
     }
