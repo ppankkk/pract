@@ -2,8 +2,10 @@ package com.skillsup.DAO.repo.impl;
 
 import com.skillsup.DAO.model.Order;
 import com.skillsup.DAO.model.Product;
+import com.skillsup.DAO.model.User;
 import com.skillsup.DAO.repo.OrderDAO;
 import com.skillsup.DAO.repo.ProductDAO;
+import com.skillsup.DAO.repo.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +24,9 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Autowired
     private ProductDAO productDAO;
+
+    @Autowired
+    private UserDAO userDAO;
 
     @Override
     public void create(Order order) {
@@ -54,8 +59,12 @@ public class OrderDAOImpl implements OrderDAO {
         for (Product product: productsInOrder) {
             productToUpdate = productDAO.get(product.getId());
             productToUpdate.setCount(productToUpdate.getCount() + product.getCount());
+            productToUpdate.getOrders().remove(order);
             productDAO.update(productToUpdate.getId(), productToUpdate);
         }
+
+        this.update(order.getId(), order);
+
         order.setStatus("deleted");
 
         Query query = entityManager.createQuery("DELETE FROM Order o WHERE o.id = :id");

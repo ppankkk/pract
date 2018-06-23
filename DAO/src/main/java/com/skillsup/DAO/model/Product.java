@@ -154,4 +154,12 @@ public class Product {
     public void setCount(Integer count) {
         this.count = count;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }
