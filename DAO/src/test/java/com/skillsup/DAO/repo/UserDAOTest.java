@@ -99,10 +99,7 @@ public class UserDAOTest {
         User user2 = new User("UpdatedAnn", "Eel", 32, null);
 
         List<User> allExpectedUsers = Arrays.asList(user1, user2);
-//        entityManager.persist(user1);
-//        entityManager.persist(user2);
 
-//Как две строки сверху, только через СТРИМЫ...
         allExpectedUsers.forEach(entityManager::persist);
 
         //When

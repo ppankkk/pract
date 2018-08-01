@@ -3,6 +3,7 @@ package com.skillsup.DAO.repo;
 import com.skillsup.DAO.model.Order;
 import com.skillsup.DAO.model.Product;
 import com.skillsup.DAO.model.User;
+import com.skillsup.WEB.initializers.OrderInitializer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +31,9 @@ public class OrderDAOTest {
     @Autowired
     private UserDAO userDAO;
 
+//    @Autowired
+//    private OrderInitializer orderInitializer;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -48,11 +52,11 @@ public class OrderDAOTest {
         products.add(productDAO.get(1L));
         User user = userDAO.get(1L);
 
-        Order order = new Order(user, products, "test", date);
+        Order order = new Order(user, products, "test", date, null);
 
         //When
         orderDAO.create(order);
-        System.out.println(orderDAO.findAll().toString());;
+        System.out.println(orderDAO.findAll().toString());
         //Then
         Order actualOrder = entityManager.find(Order.class, order.getId());
         Assert.assertEquals(order, actualOrder);
@@ -71,8 +75,8 @@ public class OrderDAOTest {
         User user1 = userDAO.get(1L);
         User user2 = userDAO.get(2L);
         List<Order> expectedOrders = new ArrayList<>();
-        expectedOrders.add(new Order(user1, products1, "testU1P1", date1));
-        expectedOrders.add(new Order(user2, products2, "testU2P2", date2));
+        expectedOrders.add(new Order(user1, products1, "testU1P1", date1, null));
+        expectedOrders.add(new Order(user2, products2, "testU2P2", date2, null));
 
         expectedOrders.forEach(entityManager::persist);
 
@@ -80,7 +84,7 @@ public class OrderDAOTest {
         List<Order> actualOrders = orderDAO.findAll();
 
         //Then
-        Assert.assertEquals(2, expectedOrders.size());
+        Assert.assertEquals(2, actualOrders.size());
         Assert.assertTrue(actualOrders.containsAll(expectedOrders));
     }
 
@@ -92,7 +96,7 @@ public class OrderDAOTest {
         products.add(productDAO.get(1L));
         User user = userDAO.get(1L);
 
-        Order order = new Order(user, products, "test", date);
+        Order order = new Order(user, products, "test", date, null);
 
         entityManager.persist(order);
 
@@ -112,7 +116,7 @@ public class OrderDAOTest {
         products.add(productDAO.get(1L));
         User user = userDAO.get(1L);
 
-        Order order = new Order(user, products, "test", date);
+        Order order = new Order(user, products, "test", date, null);
 
         entityManager.persist(order);
 
@@ -133,11 +137,11 @@ public class OrderDAOTest {
         products.add(productDAO.get(2L));
         User user = userDAO.get(2L);
 
-        Order order = new Order(user, products, "testU1P1", date1);
+        Order order = new Order(user, products, "testU1P1", date1, null);
 
         products.add(productDAO.get(3L));
 
-        Order updatedOrder = new Order(user, products, "testUpdated", date1);
+        Order updatedOrder = new Order(user, products, "testUpdated", date2, null);
 
         entityManager.persist(order);
 
@@ -147,5 +151,34 @@ public class OrderDAOTest {
         //Then
         Order actualOrder = entityManager.find(Order.class, order.getId());
         Assert.assertEquals(actualOrder, updatedOrder);
+    }
+
+    @Test
+    public void findAllUserOrdersTest() {
+        //Given
+        Set<Product> products1 = new HashSet<>();
+        Set<Product> products2 = new HashSet<>();
+        Date date1 = new Date(2017, 10, 12);
+        Date date2 = new Date(2017, 11, 12);
+        products1.add(productDAO.get(1L));
+        products1.add(productDAO.get(2L));
+        products2.add(productDAO.get(2L));
+        User user1 = userDAO.get(1L);
+        User user2 = userDAO.get(2L);
+        List<Order> expectedOrders = new ArrayList<>();
+        List<Order> expectedUserOrders = new ArrayList<>();
+        expectedOrders.add(new Order(user1, products1, "testU1P1", date1, null));
+        expectedOrders.add(new Order(user2, products2, "testU2P2", date2, null));
+
+        expectedUserOrders.add(new Order(user1, products1, "testU1P1", date1, null));
+
+        expectedOrders.forEach(entityManager::persist);
+
+        //When
+        List<Order> actualOrders = orderDAO.findAllUserOrders(user1);
+
+        //Then
+        Assert.assertEquals(1, actualOrders.size());
+        Assert.assertTrue(actualOrders.containsAll(expectedUserOrders));
     }
 }

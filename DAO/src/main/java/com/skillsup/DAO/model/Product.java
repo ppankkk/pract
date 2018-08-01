@@ -1,8 +1,10 @@
 package com.skillsup.DAO.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -34,8 +36,9 @@ public class Product {
     @Column(name = "COUNT_IN_WAREHOUSE")
     private Integer count;
 
-    @ManyToMany(mappedBy="products")
-    private List<Order> orders;
+    @JsonIgnore
+    @ManyToMany(targetEntity = Order.class)
+    private Set<Order> orders;
 
     public Product() {
     }
@@ -155,11 +158,11 @@ public class Product {
         this.count = count;
     }
 
-    public List<Order> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 }

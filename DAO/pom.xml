@@ -11,25 +11,6 @@
 
     <artifactId>DAO</artifactId>
 
-    <!--<dependencies>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-orm</artifactId>-->
-            <!--<version>${springVersion}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-entitymanager</artifactId>-->
-            <!--<version>5.3.0.Final</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.hibernate.javax.persistence</groupId>-->
-            <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
-            <!--<version>1.0.2.Final</version>-->
-        <!--</dependency>-->
-        <!---->
-    <!--</dependencies>-->
-
     <properties>
         <hibernate.version>5.2.17.Final</hibernate.version>
         <hibernate-jpa-2.1-api.version>1.0.0.Final</hibernate-jpa-2.1-api.version>
@@ -89,8 +70,11 @@
             <version>${springVersion}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
-
-
 </project>

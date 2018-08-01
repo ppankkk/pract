@@ -3,6 +3,8 @@ package com.skillsup.DAO.repo.impl;
 import com.skillsup.DAO.model.Product;
 import com.skillsup.DAO.repo.ProductDAO;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;

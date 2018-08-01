@@ -12,8 +12,7 @@
   <modules>
     <module>DAO</module>
     <module>Services</module>
-    <!--<module>Main</module>-->
-      <module>WEB</module>
+    <module>WEB</module>
   </modules>
 
   <name>pract</name>

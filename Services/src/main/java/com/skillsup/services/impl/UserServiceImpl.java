@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserServices{
         return userDTOS;
     }
 
-// 21-05-2018 homework
     @Override
     @Transactional
     public void delete(Long id) {

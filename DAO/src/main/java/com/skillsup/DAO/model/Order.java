@@ -1,28 +1,6 @@
 package com.skillsup.DAO.model;
-//
-//import javax.persistence.*;
-//import java.util.Date;
-//
-//@Entity
-//@Table(name = "ORDERS")
-//public class Order {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "ID", nullable = false)
-//    private Long id;
-//
-//    @Column(name = "USER_ID", nullable = false)
-//    private Long user;
-//
-//    @Column(name = "CREATION_DATE", nullable = false)
-//    private Date date;
-//
-//    @Column(name = "PRODUCTS", nullable = false)
-//    private Product product;
-//
-//    @Column(name = "STATUS", nullable = false)
-//    private String status;
-//}
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.*;
@@ -35,15 +13,12 @@ public class Order {
     @Column(name = "ID", nullable = false)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="USER", nullable = false)
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "ORDER_PRODUCT",
-            joinColumns = @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID"))
+    @JsonIgnore
+    @ManyToMany(targetEntity = Product.class, fetch = FetchType.EAGER)
     private Set<Product> products;
 
     @Column(name = "STATUS", nullable = false)
@@ -56,11 +31,12 @@ public class Order {
 
     }
 
-    public Order(User user, Set<Product> products, String status, Date date) {
+    public Order(User user, Set<Product> products, String status, Date date, Long id) {
         this.user = user;
         this.products = products;
         this.status = status;
         this.date = date;
+        this.id = id;
     }
 
     public Long getId() {
