@@ -3,7 +3,6 @@ package com.skillsup.DAO.repo.impl;
 import com.skillsup.DAO.model.User;
 import com.skillsup.DAO.repo.UserDAO;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

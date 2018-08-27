@@ -56,7 +56,6 @@ public class UserServiceImpl implements UserServices{
     @Override
     @Transactional(readOnly = true)
     public UserDTO get(Long id) {
-        userDao.get(id);
-        return null;
+        return userConvert.toDto(userDao.get(id));
     }
 }

@@ -3,7 +3,6 @@ package com.skillsup.DAO.repo;
 import com.skillsup.DAO.model.Order;
 import com.skillsup.DAO.model.Product;
 import com.skillsup.DAO.model.User;
-import com.skillsup.WEB.initializers.OrderInitializer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +29,6 @@ public class OrderDAOTest {
 
     @Autowired
     private UserDAO userDAO;
-
-//    @Autowired
-//    private OrderInitializer orderInitializer;
 
     @PersistenceContext
     private EntityManager entityManager;

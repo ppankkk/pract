@@ -14,11 +14,17 @@ public class Order {
     private Long id;
 
     @JsonIgnore
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = Product.class, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "ORDERS_PRODUCTS",
+            joinColumns = @JoinColumn(name="ORDER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCTS_ID")
+    )
     private Set<Product> products;
 
     @Column(name = "STATUS", nullable = false)

@@ -76,10 +76,6 @@ public class OrderServiceImpl implements OrderService {
             product.getOrders().remove(order);
             productDAO.update(product.getId(), product);
         }
-
-        order.getUser().getOrders().remove(order);
-        userDAO.update(order.getUser().getId(), order.getUser());
-
         order.setStatus("deleted");
         orderDAO.delete(id);
     }

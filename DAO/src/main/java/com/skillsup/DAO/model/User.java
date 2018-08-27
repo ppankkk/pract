@@ -2,6 +2,7 @@ package com.skillsup.DAO.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
@@ -23,6 +24,9 @@ public class User {
 
     public User() {
     }
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Order> orders;
 
     @Override
     public String toString() {

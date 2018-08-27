@@ -37,7 +37,7 @@ public class Product {
     private Integer count;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = Order.class)
+    @ManyToMany(mappedBy = "products")
     private Set<Order> orders;
 
     public Product() {

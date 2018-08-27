@@ -1,8 +1,5 @@
 package com.skillsup.WEB.initializers;
 
-import com.skillsup.DAO.repo.impl.OrderDAOImpl;
-import com.skillsup.DAO.repo.impl.ProductDAOImpl;
-import com.skillsup.DAO.repo.impl.UserDAOImpl;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
