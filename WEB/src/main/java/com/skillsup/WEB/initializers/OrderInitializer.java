@@ -29,18 +29,20 @@ public class OrderInitializer implements ApplicationListener<ContextRefreshedEve
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+
         Set<Product> products = new HashSet<>();
+
         products.add(productDAO.get(1L));
         products.add(productDAO.get(2L));
         products.add(productDAO.get(3L));
 
-        orderDAO.create(new Order(userDAO.get(1L), products, "initialized", new Date(2017, 10, 12), null));
-        orderDAO.create(new Order(userDAO.get(1L), products, "initialized", new Date(2017, 11, 12), null));
-        orderDAO.create(new Order(userDAO.get(1L), products, "initialized", new Date(2017, 11, 18), null));
+        orderDAO.create(new Order(userDAO.get(1L), products, "initialized", new Date(2017-1900, 10, 12), null));
+        orderDAO.create(new Order(userDAO.get(1L), products, "initialized", new Date(2017-1900, 11, 12), null));
+        orderDAO.create(new Order(userDAO.get(1L), products, "initialized", new Date(2017-1900, 11, 18), null));
 
         products.remove(productDAO.get(2L));
 
-        orderDAO.create(new Order(userDAO.get(2L), products, "initialized", new Date(2017, 11, 18), null));
-        orderDAO.create(new Order(userDAO.get(2L), products, "initialized", new Date(2018, 1, 8), null));
+        orderDAO.create(new Order(userDAO.get(2L), products, "initialized", new Date(2017-1900, 11, 18), null));
+        orderDAO.create(new Order(userDAO.get(2L), products, "initialized", new Date(2018-1900, 1, 8), null));
     }
 }

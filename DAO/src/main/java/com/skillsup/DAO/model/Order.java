@@ -1,6 +1,7 @@
 package com.skillsup.DAO.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.*;
@@ -13,19 +14,19 @@ public class Order {
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @JsonIgnore
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
+    @JsonManagedReference
     private User user;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "ORDERS_PRODUCTS",
             joinColumns = @JoinColumn(name="ORDER_ID"),
             inverseJoinColumns = @JoinColumn(name = "PRODUCTS_ID")
     )
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
 
     @Column(name = "STATUS", nullable = false)
     private String status;

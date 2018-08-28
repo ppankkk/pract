@@ -1,6 +1,9 @@
 package com.skillsup.DAO.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,8 +28,9 @@ public class User {
     public User() {
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<Order> orders;
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private Set<Order> orders = new HashSet<>();
 
     @Override
     public String toString() {
@@ -65,7 +69,7 @@ public class User {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -75,6 +79,14 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
