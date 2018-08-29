@@ -13,21 +13,22 @@
 <body>
 
 <div class="container">
+    <div id="notifies"></div>
     <div class="page-header">
-        <h1>Hello this my project</h1>
+        <h1>SkillsUp project by Paniushkin Nikolay</h1>
         <p class="lead">
-            This page shows all Users in DB and you can see user details by click on user name.
+            That page is a web view for Java practice project "Internet Shop".
         </p>
     </div>
     <div class="row">
         <div class="col-sm-4 col-md-4 col-lg-4" align="center">
-            <button type="button" class="btn btn-lg btn-info show_users">Show Users</button>
+            <button type="button" class="btn btn-lg btn-info" id="show_users">Show Users</button>
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4" align="center">
-            <button type="button" class="btn btn-lg btn-info show_products">Show Products</button>
+            <button type="button" class="btn btn-lg btn-info" id="show_products">Show Products</button>
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4" align="center">
-            <button type="button" class="btn btn-lg btn-info show_orders">Show Orders</button>
+            <button type="button" class="btn btn-lg btn-info" id="show_orders">Show Orders</button>
         </div>
     </div>
 
@@ -41,6 +42,17 @@
                     <tr><th></th><th></th><th></th></tr>
                     <tr><td></td><td></td><td></td></tr>
                 </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4" align="center">
+                    <button class="btn btn-lg btn-success add_user" data-toggle="modal" data-target="#addUserModal">Add User</button>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" align="center">
+                    <button class="btn btn-lg btn-warning edit_user" data-toggle="modal" data-target="#editUserModal">Edit User</button>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" align="center">
+                    <button class="btn btn-lg btn-danger delete_user" data-toggle="modal" data-target="#deleteUserModal">Delete User</button>
+                </div>
             </div>
         </div>
     </div>
@@ -72,8 +84,126 @@
     </div>
 </div>
 
+
+<!--User add form-->
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="addUserModalLabel">Input user data to add new one</h3>
+            </div>
+            <div class="modal-body">
+                <form  class="container container-form" id="formAddUser" style="width: 100%">
+                        <div class="form-group">
+                            <label for="inputAddFirstName">First name</label>
+                            <input type="text" class="form-control" id="inputAddFirstName" placeholder="Input first name">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddSecoundName">Last name</label>
+                            <input type="text" class="form-control" id="inputAddSecoundName" placeholder="Input last Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddAge">Age</label>
+                            <input type="number" class="form-control" id="inputAddAge" placeholder="Input age">
+                        </div>
+                    <div class="form" align="center">
+                        <button type="button" id="addUser" class="btn btn-info" data-dismiss="modal">Add user</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--User edit form-->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="editUserModalLabel">Input user data to add new one</h3>
+            </div>
+            <div class="modal-body">
+                <form  class="container container-form" id="formeditUser" style="width: 100%">
+                    <div class="form-group">
+                        <label for="inputAddFirstName">First name</label>
+                        <input type="text" class="form-control" id="inputEditId" placeholder="Input ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddFirstName">First name</label>
+                        <input type="text" class="form-control" id="inputEditFirstName" placeholder="Input first name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddSecoundName">Last name</label>
+                        <input type="text" class="form-control" id="inputEditSecoundName" placeholder="Input last Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddAge">Age</label>
+                        <input type="number" class="form-control" id="inputEditAge" placeholder="Input age">
+                    </div>
+                    <div class="form" align="center">
+                        <button type="button" id="editUser" class="btn btn-info" data-dismiss="modal">Update user</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--User delete form-->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="deleteUserModalLabel">Delete user</h3>
+            </div>
+            <div class="modal-body">
+                <form  class="container container-form" id="formDeleteUser" style="width: 100%">
+                    <div class="form-group">
+                        <label for="inputDeleteId">First name</label>
+                        <input type="text" class="form-control" id="inputDeleteId" placeholder="ID">
+                    </div>
+                    <div class="form" align="center">
+                        <button type="button" id="deleteUserId" class="btn btn-info" data-dismiss="modal">Delete user</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/my_script.js"></script>
+
+<script>
+    Notify = {
+        TYPE_INFO: 0,
+        TYPE_SUCCESS: 1,
+        TYPE_WARNING: 2,
+        TYPE_DANGER: 3,
+
+        generate: function (aText, aOptHeader, aOptType_int) {
+            var lTypeIndexes = [this.TYPE_INFO, this.TYPE_SUCCESS, this.TYPE_WARNING, this.TYPE_DANGER];
+            var ltypes = ['alert-info', 'alert-success', 'alert-warning', 'alert-danger'];
+            var ltype = ltypes[this.TYPE_INFO];
+
+            if (aOptType_int !== undefined && lTypeIndexes.indexOf(aOptType_int) !== -1) {
+                ltype = ltypes[aOptType_int];
+            }
+
+            var lText = '';
+            if (aOptHeader) {
+                lText += "<h4>"+aOptHeader+"</h4>";
+            }
+            lText += "<p>"+aText+"</p>";
+            var lNotify_e = $("<div class='alert "+ltype+"'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button>"+lText+"</div>");
+
+            setTimeout(function () {
+                lNotify_e.alert('close');
+            }, 5000);
+            lNotify_e.appendTo($("#notifies"));
+        }
+    };
+</script>
 </body>
 </html>
